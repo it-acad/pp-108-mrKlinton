@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Реєстрація
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Реєстрація</h2>
+    <form method="POST" action="{% url 'register' %}">
+        {% csrf_token %}
+        <div class="mb-3">
+            <input type="email" name="email" class="form-control" placeholder="Email" required>
+        </div>
+        <div class="mb-3">
+            <input type="password" name="password" class="form-control" placeholder="Пароль" required>
+        </div>
+        <div class="mb-3">
+            <input type="text" name="first_name" class="form-control" placeholder="Ім'я" required>
+        </div>
+        <div class="mb-3">
+            <input type="text" name="last_name" class="form-control" placeholder="Прізвище" required>
+        </div>
+        <div class="mb-3">
+            <input type="text" name="middle_name" class="form-control" placeholder="По батькові" required>
+        </div>
+        <div class="mb-3">
+            <select name="role" class="form-select">
+                <option value="0">Гість</option>
+                <option value="1">Бібліотекар</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-success">Реєстрація</button>
+    </form>
+</div>
+{% endblock %}

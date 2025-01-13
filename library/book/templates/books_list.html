@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Список Книг
+{% endblock %}
+
+{% block content %}
+
+<a class="nav-link" href="{% url 'logout' %}">Logout</a>
+   
+<div class="container mt-5">
+    <h2>Список Книг</h2>
+    <form method="get" action="{% url 'books_filter' %}" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="q" class="form-control" placeholder="Пошук за назвою">
+            <button type="submit" class="btn btn-outline-secondary">Пошук</button>
+        </div>
+    </form>
+    <ul class="list-group">
+        {% for book in books %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+            {{ book.name }}
+            <a href="{% url 'book_detail' book.id %}" class="btn btn-primary btn-sm">Деталі</a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

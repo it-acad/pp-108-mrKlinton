@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Створення замовлення{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Створення нового замовлення</h1>
+    <form method="POST" action="{% url 'create_order' %}">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="book" class="form-label">Книга</label>
+            <select id="book" name="book" class="form-select" required>
+                {% for book in books %}
+                <option value="{{ book.id }}">{{ book }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="plated_end_at" class="form-label">Планова дата повернення</label>
+            <input type="date" id="plated_end_at" name="plated_end_at" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Створити</button>
+    </form>
+</div>
+{% endblock %}

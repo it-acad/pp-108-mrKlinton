@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Список замовлень{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Список замовлень</h1>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Книга</th>
+                <th>Користувач</th>
+                <th>Дата створення</th>
+                <th>Планова дата повернення</th>
+                <th>Дата повернення</th>
+                <th>Дії</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.id }}</td>
+                <td>{{ order.book }}</td>
+                <td>{{ order.user }}</td>
+                <td>{{ order.created_at }}</td>
+                <td>{{ order.plated_end_at }}</td>
+                <td>{{ order.end_at|default:"Не повернено" }}</td>
+                <td>
+                    {% if user.is_staff and not order.end_at %}
+                    <form method="POST" action="{% url 'close_order' order.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm">Закрити</button>
+                    </form>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

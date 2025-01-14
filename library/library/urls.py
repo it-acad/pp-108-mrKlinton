@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from book import views as book_views
 from authentication import views as auth_views 
+from order import views as order_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     
@@ -28,4 +29,7 @@ urlpatterns = [
     path('books/<int:book_id>/', book_views.book_detail, name='book_detail'),
     path('books/filter/', book_views.books_filter, name='books_filter'),
     path('books/user/<int:user_id>/', book_views.books_by_user, name='books_by_user'),
+    path('orders/', order_views.orders_list, name='orders_list'), 
+    path('orders/create/', order_views.create_order, name='create_order'),  
+    path('orders/<int:order_id>/close/', order_views.close_order, name='close_order'),
 ]          
